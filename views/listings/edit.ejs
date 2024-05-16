@@ -1,0 +1,104 @@
+<%layout("/layouts/boilerPlate")%>
+<body>
+  <h3 class="my-4">Edit your post</h3>
+  <form
+    method="POST"
+    action="/listings/<%=listing.id%>?_method=PUT"
+    class="border p-4 mb-5 rounded needs-validation"
+    novalidate
+  >
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Enter Title</label
+      >
+      <input
+        name="listing[title]"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        value="<%=listing.title%>"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please choose title.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">
+        Description</label
+      >
+      <textarea
+        name="listing[description]"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+        required
+      >
+      
+<%=listing.description%></textarea
+      >
+      <div class="invalid-feedback">Please write description.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Enter Image</label
+      >
+      <input
+        name="listing[image]"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        value="<%= listing.image ? listing.image.url : '' %>"
+        required
+      />
+      <div class="invalid-feedback">Please choose image.</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Price</label>
+          <input
+            name="listing[price]"
+            type="number"
+            class="form-control"
+            id="exampleFormControlInput1"
+            value="<%=listing.price%>"
+            required
+          />
+          <div class="invalid-feedback">Please enter price.</div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Country</label
+          >
+          <input
+            name="listing[country]"
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            value="<%=listing.country%>"
+            required
+          />
+          <div class="invalid-feedback">Please choose a country.</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label"
+        >Enter location</label
+      >
+      <input
+        name="listing[location]"
+        type="text"
+        class="form-control"
+        id="exampleFormControlInput1"
+        value="<%=listing.location%>"
+        required
+      />
+      <div class="invalid-feedback">Please choose a location.</div>
+    </div>
+
+    <button class="btn btn-dark">Add</button>
+  </form>
+</body>

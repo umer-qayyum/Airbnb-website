@@ -1,0 +1,103 @@
+<%layout("/layouts/boilerPlate")%>
+<body>
+  <div class="container">
+    <div class="row my-4">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <h3 class="my-4"><%=listing.title%></h3>
+        <div class="card mb-4 listingCard">
+          <img src="<%=listing.image.url%>" class="card-img-top" alt="..." />
+          <div class="card-body pt-3" style="padding: 0%; margin: 0">
+            <p class="card-text"><%=listing.description%></p>
+            <p class="card-text">
+              &#8377;<%=listing.price.toLocaleString("en-IN")%>
+            </p>
+            <p class="card-text"><%=listing.location%></p>
+            <p class="card-text"><%=listing.country%></p>
+            <div class="row">
+              <div class="col-lg-2 col-3 gap-2">
+                <a
+                  href="/listings/<%=listing.id%>/edit"
+                  class="btn btn-dark px-4 me-2 mt-2"
+                  >Edit</a
+                >
+              </div>
+              <div class="col-lg-2 col-3">
+                <form
+                  method="post"
+                  action="/listings/<%=listing.id%>?_method=DELETE"
+                >
+                  <button class="btn btn-dark me-2 mt-2">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-8">
+        <hr />
+        <h3 class="my-3">Leave Reviews</h3>
+        <form
+          method="POST"
+          action="/listings/<%=listing.id%>/reviews"
+          novalidate
+          class="needs-validation"
+        >
+          <label for="rating" class="form-label mt-2">Rating</label>
+          <input
+            type="range"
+            name="reviews[rating]"
+            min="1"
+            max="5"
+            class="mb-3 form-range"
+          /><br />
+          <label for="comment" class="form-label mt-3">Comment</label>
+          <textarea
+            class="form-control mb-3"
+            rows="5"
+            placeholder="Enter your comment"
+            name="reviews[comment]"
+            required
+          ></textarea>
+          <div class="invalid-feedback">please write some comment</div>
+          <button class="btn btn-dark my-3">Submit</button>
+        </form>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2"></div>
+
+      <div class="col-lg-8">
+        <hr />
+        <div class="row">
+          <% for(review of listing.reviews) {%>
+          <div class="col-lg-6 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h4>John Doe</h4>
+                <p><%=review.comment%></p>
+                <p><%=review.rating%>stars</p>
+              </div>
+              <form
+                method="post"
+                action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
+              >
+                <button class="btn btn-dark">Delete</button>
+              </form>
+            </div>
+          </div>
+          <%}%>
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+  </div>
+</body>
